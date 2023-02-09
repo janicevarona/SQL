@@ -1,0 +1,29 @@
+--Create Handbags Database
+
+CREATE TABLE handbags (id INTEGER PRIMARY KEY, name TEXT, color TEXT, price INTEGER, size TEXT);
+
+INSERT INTO handbags VALUES (1, "wallet", "red", 25, "small");
+INSERT INTO handbags VALUES (2, "clutch", "black", 50, "small");
+INSERT INTO handbags VALUES (3, "purse", "black", 50, "small");
+INSERT INTO handbags VALUES (4, "crossbody", "multicolor", 60, "medium");
+INSERT INTO handbags VALUES (5, "belt bag", "gray", 60, "small");
+INSERT INTO handbags VALUES (6, "camera bag", "beige", 65, "small");
+INSERT INTO handbags VALUES (7, "bowling bag", "camel", 70, "medium");
+INSERT INTO handbags VALUES (8, "boston bag", "black", 70, "medium");
+INSERT INTO handbags VALUES (9, "bucket bag", "navy", 70, "medium");
+INSERT INTO handbags VALUES (10, "top handle bag", "taupe", 75, "medium");
+INSERT INTO handbags VALUES (11, "satchel", "black", 75, "medium");
+INSERT INTO handbags VALUES (12, "briefcase", "black", 80, "large");
+INSERT INTO handbags VALUES (13, "messenger bag", "gray", 80, "large");
+INSERT INTO handbags VALUES (14, "backpack", "black", 80, "large");
+INSERT INTO handbags VALUES (15, "weekender", "black", 85, "extra large");
+
+
+--Display the list by price
+SELECT * FROM handbags ORDER BY price desc;
+
+--Display highest price of handbag in the database
+SELECT name, MAX (price) FROM handbags GROUP BY name;
+
+
+
