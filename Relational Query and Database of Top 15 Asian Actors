@@ -1,0 +1,76 @@
+/* Built a database containing top 15 asian actors in Hollywood containing their age, name, and latest movie*/
+CREATE TABLE top_asian_actors (id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT,
+    age INTEGER,
+    latest_movie TEXT);
+    
+INSERT INTO top_asian_actors (name, age, latest_movie) VALUES ("Henry Golding", 36, "The Tiger's Apprentice");
+INSERT INTO top_asian_actors (name, age, latest_movie) VALUES ("Jackie Chan", 68, "Project X-Traction");
+INSERT INTO top_asian_actors (name, age, latest_movie) VALUES ("Michelle Yeoh", 60, "Avatar 3");
+INSERT INTO top_asian_actors (name, age, latest_movie) VALUES ("Daniel Dae Kim", 54, "Stowaway");
+INSERT INTO top_asian_actors (name, age, latest_movie) VALUES ("Constance Wu", 40, "Lyle, Lyle, Crocodile");
+INSERT INTO top_asian_actors (name, age, latest_movie) VALUES ("James Hong", 93, "Everything Everywhere All at Once");
+INSERT INTO top_asian_actors (name, age, latest_movie) VALUES ("Jimmy O Yang", 35, "80 for Brady");
+INSERT INTO top_asian_actors (name, age, latest_movie) VALUES ("Jet Li", 59, "Mulan");
+INSERT INTO top_asian_actors (name, age, latest_movie) VALUES ("Jessica Henwick", 30, "Cuckoo");
+INSERT INTO top_asian_actors (name, age, latest_movie) VALUES ("Ken Jeong", 53, "The Seven Faces of Jane");
+INSERT INTO top_asian_actors (name, age, latest_movie) VALUES ("Lucy Liu", 54, "Red One");
+INSERT INTO top_asian_actors (name, age, latest_movie) VALUES ("John Cho", 50, "Star Trek 4");
+INSERT INTO top_asian_actors (name, age, latest_movie) VALUES ("Kelly Marie Tran", 34, "The Young Wife");
+INSERT INTO top_asian_actors (name, age, latest_movie) VALUES ("Aaron Yoo", 43, "Wish Dragon");
+INSERT INTO top_asian_actors (name, age, latest_movie) VALUES ("Kenneth Choi", 51, "88");
+
+
+
+/*Built another table with a common data from the previous database but only containing the actor's name and net worth as of 2022*/
+CREATE TABLE net_worth (id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT,
+    net_worth_in_USDmillion INTEGER);
+
+INSERT INTO net_worth (name, net_worth_in_USDmillion) VALUES ("Henry Golding", 3);
+INSERT INTO net_worth (name, net_worth_in_USDmillion) VALUES ("Jackie Chan", 520);
+INSERT INTO net_worth (name,net_worth_in_USDmillion) VALUES ("Michelle Yeoh", 40);
+INSERT INTO net_worth (name, net_worth_in_USDmillion) VALUES ("Daniel Dae Kim", 15);
+INSERT INTO net_worth (name, net_worth_in_USDmillion) VALUES ("Constance Wu", 6);
+INSERT INTO net_worth (name, net_worth_in_USDmillion) VALUES ("James Hong", 8);
+INSERT INTO net_worth (name, net_worth_in_USDmillion) VALUES ("Jimmy O Yang", 5);
+INSERT INTO net_worth (name, net_worth_in_USDmillion) VALUES ("Jet Li", 250);
+INSERT INTO net_worth (name, net_worth_in_USDmillion) VALUES ("Jessica Henwick", 5);
+INSERT INTO net_worth (name, net_worth_in_USDmillion) VALUES ("Ken Jeong", 14);
+INSERT INTO net_worth (name, net_worth_in_USDmillion) VALUES ("Lucy Liu", 16);
+INSERT INTO net_worth (name, net_worth_in_USDmillion) VALUES ("John Cho", 14);
+INSERT INTO net_worth (name, net_worth_in_USDmillion) VALUES ("Kelly Marie Tran", 3);
+INSERT INTO net_worth (name, net_worth_in_USDmillion) VALUES ("Aaron Yoo", 2);
+INSERT INTO net_worth (name, net_worth_in_USDmillion) VALUES ("Kenneth Choi", 2);
+
+
+
+/*Displays the content of the first database*/
+SELECT * FROM top_asian_actors;
+
+
+
+/*Displays a relational query between two tables on the actors' net worth shown in descending order*/
+SELECT a.name, b.net_worth_in_USDmillion 
+FROM top_asian_actors a
+    JOIN net_worth b
+    ON a.name = b.name
+    ORDER BY b.net_worth_in_USDmillion desc;
+    
+    
+    
+    
+
+   
+    
+    
+    
+    
+   
+    
+    
+    
+    
+    
+    
+    
