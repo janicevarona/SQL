@@ -1,0 +1,46 @@
+/*The database used to derive these queries that I wrote were from Netflix, as created by Break into Tech.*/
+
+
+
+/*Displays relational query showing data from the two different tables.*/
+SELECT a.show_id, a.director, b.title, b.type
+FROM "CharlotteChaze/BreakIntoTech"."netflix_people" a
+LEFT JOIN "CharlotteChaze/BreakIntoTech"."netflix_titles_info" b
+ON a.show_id = b.show_id;
+
+
+
+/*Displays how many movie titles are in the database. TV Show titles are excluded from the count.*/
+SELECT COUNT (*) 
+FROM "CharlotteChaze/BreakIntoTech"."netflix_titles_info" b
+    WHERE b.type = 'Movie';
+
+
+
+/*Displays the date when the latest batch of movies and TV shows were added to the database.*/
+SELECT MAX(DATE(date_added))
+FROM "CharlotteChaze/BreakIntoTech"."netflix_titles_info";
+
+
+
+/*Displays the list of movies and TV shows titles in alphabetical order.*/
+SELECT title
+FROM "CharlotteChaze/BreakIntoTech"."netflix_titles_info"
+ORDER BY title asc;
+
+
+
+/*Displays the name of the Director for the movie "Bright Star".*/
+SELECT a.director
+FROM "CharlotteChaze/BreakIntoTech"."netflix_people" a
+LEFT JOIN "CharlotteChaze/BreakIntoTech"."netflix_titles_info" b
+ON a.show_id = b.show_id
+WHERE b.title = 'Bright Star';
+
+
+
+/*Displays the oldest movie in the database and the year it was released.*/
+SELECT release_year
+FROM "CharlotteChaze/BreakIntoTech"."netflix_titles_info"
+ORDER BY release_year asc
+LIMIT 1;
