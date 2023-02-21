@@ -1,0 +1,52 @@
+/*The following contains different SQL queries that I wrote pertaining to the database that contains customer information and order data.*/
+
+
+/*Displays the total number of orders that were placed in January*/
+SELECT COUNT(orderID) FROM BIT_DB.JanSales
+    WHERE LENGTH (orderID) = 6
+    AND orderID <> 'Order ID'
+    
+    
+/*Displays the number of orders for iPhone from the results in the previous query.*/
+SELECT COUNT(orderID) FROM BIT_DB.JanSales
+    WHERE LENGTH (orderID) = 6
+    AND orderID <> 'Order ID'
+    AND Product = 'iPhone'
+    
+    
+/*Displays the customer account numbers of all the orders that were placed in February.*/
+SELECT a.acctnum FROM BIT_DB.customers a
+    INNER JOIN BIT_DB.FebSales b
+    ON a.order_id = b.orderID
+    WHERE LENGTH (orderID) = 6
+    AND orderID <> 'Order ID'
+    
+    
+/*Displays the cheapest product sold in January and its price.*/
+SELECT distinct Product, price
+FROM BIT_DB.JanSales
+WHERE  price in (SELECT min(price) FROM BIT_DB.JanSales)
+
+
+/*Displays the total revenue for each product sold in January.*/
+SELECT product, SUM(quantity)*price as Revenue
+    FROM BIT_DB.JanSales
+    GROUP BY product
+    
+    
+/* Displays the products sold in February to a customer with an address of 548 Lincoln St, Seattle, WA 98101; 
+how many of each products were sold; and what was the total revenue.*/
+SELECT Product, SUM(Quantity) as total_qty, SUM(Quantity)*price as revenue
+    FROM BIT_DB.FebSales 
+    WHERE location = '548 Lincoln St, Seattle, WA 98101'
+    GROUP BY Product
+    
+    
+/*Displays the number of customers who ordered more than two items at a time, and how much was the average amount spent by those customers.*/
+SELECT COUNT (distinct a.acctnum) as Customers, AVG (b.Quantity*b.price) as Avg_spent
+    FROM BIT_DB.customers a
+    LEFT JOIN BIT_DB.FebSales b
+    ON a.order_id = b.orderID
+    WHERE b.Quantity >2
+    AND length(orderID) = 6
+    AND orderID <> 'Order ID'
