@@ -34,6 +34,24 @@ SELECT product, SUM(quantity)*price as Revenue
     GROUP BY product
     
     
+/*Displays the average amount spent per customer account in February*/
+SELECT b.acctnum, (SUM (a.Quantity) * price) / (COUNT (a.orderID)) as average
+    FROM BIT_DB.FebSales a
+    LEFT JOIN BIT_DB.customers b
+        ON a.orderID = b.order_id
+    WHERE LENGTH(order_id) = 6
+    AND order_id <> 'Order ID'
+    GROUP BY b.acctnum
+    
+    
+ /*Displays the product that brought the highest revenue for the month of January to include the total amount of revenue.*/
+ SELECT distinct product, SUM (Quantity*price) as revenue
+    FROM BIT_DB.JanSales
+    GROUP by product
+    ORDER by revenue desc
+    LIMIT 1
+    
+    
 /* Displays the products sold in February to a customer with an address of 548 Lincoln St, Seattle, WA 98101; 
 how many of each products were sold; and what was the total revenue.*/
 SELECT Product, SUM(Quantity) as total_qty, SUM(Quantity)*price as revenue
