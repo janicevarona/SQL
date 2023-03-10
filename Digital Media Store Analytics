@@ -1,0 +1,50 @@
+/* Performed Analytics on the data from a digital media store containing customers info, sales, invoices, employees, tracks, albums, artists info, and others. */
+
+
+/*Displays information of customers based in France.*/
+SELECT * FROM chinook.customers
+    WHERE Country = 'France'
+    
+    
+/*Displays the total amount of sales for the first quarter of 2011.*/
+SELECT SUM(Total) as First_Quarter2011_Sales
+    FROM chinook.invoices
+    WHERE InvoiceDate BETWEEN '2011-01-01' AND '2011-03-31'
+    
+    
+/*Displays the names of the employees or agents and their total sales. Data are coming from 3 different tables. */
+SELECT agent.FirstName, agent.LastName, ROUND(SUM(invoice.Total)) as 'Total_Sales'
+        FROM chinook.employees agent
+    JOIN chinook.customers buyers
+    ON buyers.SupportRepID = agent.EmployeeID
+    JOIN chinook.invoices invoice
+    ON invoice.CustomerID = buyers.CustomerID
+    WHERE agent.Title = 'Sales Support Agent'
+GROUP BY agent.FirstName 
+
+
+/*Displays the annual total sales for 2010.*/
+SELECT ROUND(SUM(Total)) as '2010 Annual Sales'
+    FROM chinook.invoices
+    WHERE InvoiceDate BETWEEN '2010-01-01' AND '2010-12-31'
+    
+    
+/*Displays Germany-based customers' full name, customer ID, and total purchase. Data are combined from two tables.*/
+SELECT a.CustomerID, a.FirstName, a.LastName, b.Total
+    FROM chinook.customers a
+    LEFT JOIN chinook.invoices b
+    ON a.CustomerID = b.CustomerID
+    WHERE b.BillingCountry = 'Germany'
+    
+
+/*Displays song titles composed by AC/DC.*/
+SELECT Name as 'Song Title' FROM chinook.tracks
+    WHERE Composer = 'AC/DC'
+    
+    
+/*Displays the song titles and composers of tracks that are listed as Rock genre. Data are combined from two tables. */
+SELECT a.name as 'Song Title', a.composer, b.name as 'Genre'
+    FROM chinook.tracks a
+    LEFT JOIN chinook.genres b
+    ON a.GenreID = b.GenreID
+    WHERE Genre = 'Rock'
