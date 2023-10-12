@@ -1,0 +1,34 @@
+/* Datasets are downloaded from https://www.kaggle.com/datasets/kaggle/us-consumer-finance-complaints.
+Database contains US Consumer Finance Complaints*/
+
+/*Explore the contents of the database*/
+SELECT * 
+FROM consumer_complaints;
+
+/* Data Cleaning by removing NULL or empty values inside the dataset and prepare it for analysis.*/ 
+SELECT *
+FROM consumer_complaints
+    WHERE sub_product NOT NULL
+    AND sub_issue NOT NULL
+    AND consumer_complaint_narrative NOT NULL
+    AND company_public_response NOT NULL
+    AND tags NOT NULL 
+    AND consumer_consent_provided NOT NULL;
+    
+/*Displays the number of complaints per state from highest to lowest order*/
+SELECT state, COUNT(*) as 'number of complaints'
+FROM consumer_complaints
+GROUP BY state
+ORDER BY COUNT(*) desc;
+
+/*Displays the total of complaints concerning Mortgage issues.*/
+SELECT product, COUNT(*) as 'Total Complaints'
+FROM consumer_complaints
+WHERE product = 'Mortgage'
+GROUP BY product;
+
+/*Displays in descending order the companies and total financial complaints against them.*/
+SELECT company, COUNT (*) as Total_complaints
+FROM consumer_complaints
+GROUP BY company
+ORDER BY COUNT(*) DESC;
